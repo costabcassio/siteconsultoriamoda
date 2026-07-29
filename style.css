@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth; /* Rolagem suave entre as seções */
+}
+
 body {
     font-family: 'Inter', sans-serif;
     color: #1a1a1a;
@@ -47,11 +51,14 @@ a {
     color: #fff;
 }
 
-/* Header */
+/* Header (Menu Fixo no topo) */
 header {
     background-color: #2b2b2b;
     padding: 20px 40px;
     border-bottom: 3px solid #c3986a; /* Linha dourada */
+    position: sticky; /* Fica fixo ao rolar a página */
+    top: 0;
+    z-index: 1000;
 }
 
 nav {
@@ -69,7 +76,7 @@ nav ul li a {
     color: #fff;
     font-size: 0.9rem;
     font-weight: 300;
-    padding-bottom: 23px; /* Para a linha do home aparecer */
+    padding-bottom: 23px;
     transition: color 0.3s;
 }
 
@@ -146,35 +153,24 @@ nav ul li.active a {
     font-weight: 600;
 }
 
-/* Seção Middle (Grid) */
+/* Seção Middle (Agora empilhada corretamente) */
 .middle-section {
     padding: 60px 20px 100px 20px;
 }
 
-.grid-two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-}
-
-/* Coluna Movimento */
-.movimento h3 {
-    font-size: 2.8rem;
-    line-height: 1.1;
-    margin-bottom: 20px;
-}
-
-.movimento p {
-    font-size: 0.95rem;
-    color: #444;
-    margin-bottom: 15px;
+.movimento-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-bottom: 60px;
+    align-items: center;
 }
 
 .movimento-img-container {
     position: relative;
-    margin-top: 30px;
-    width: 100%;
+    width: 40%;
     max-width: 400px;
+    flex-shrink: 0; 
 }
 
 .movimento-img-container img {
@@ -197,14 +193,30 @@ nav ul li.active a {
     font-size: 1.5rem;
 }
 
-/* Coluna Serviços */
+.movimento-text {
+    flex: 1; 
+}
+
+.movimento-text h3 {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.movimento-text p {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Bloco Serviços e Notas */
 .services {
     margin-bottom: 60px;
 }
 
 .service-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Lado a lado */
     gap: 20px;
 }
 
@@ -224,33 +236,32 @@ nav ul li.active a {
     font-weight: 300;
 }
 
-/* Coluna Notas */
+/* Notas (3 colunas) */
 .notes .note-list {
     display: flex;
-    flex-wrap: wrap; /* Permite que em telas pequenas eles virem coluna */
+    flex-wrap: wrap;
 }
 
 .notes .note-item {
-    border-top: 1px solid #e0e0e0;
-    border-right: 1px solid #e0e0e0; /* A linha vertical que faltava */
-    padding: 15px 20px;
     flex: 1;
-    min-width: 150px; /* Largura mínima para não espremer o texto */
+    min-width: 150px;
+    border-top: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0; /* Linha vertical */
+    padding: 15px 20px;
     font-size: 0.95rem;
     color: #333;
 }
 
 .notes .note-item:last-child {
-    border-right: none; /* Tira a linha do último item */
+    border-right: none; /* Remove a linha do último */
 }
 
 .notes .note-item p {
     margin: 0;
 }
 
-/* Seção Manifesto */
+/* Seção Manifesto (Contato) */
 .manifesto {
-    /* Textura marrom/couro gerada via código, sem precisar de arquivo externo */
     background-color: #4a3b32;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
     background-size: cover;
@@ -262,7 +273,6 @@ nav ul li.active a {
 }
 
 .manifesto-overlay {
-    /* Diminui a escuridão para a textura de fundo aparecer um pouco */
     background-color: rgba(0, 0, 0, 0.35);
     width: 100%;
     height: 100%;
@@ -337,16 +347,9 @@ footer {
     .hero-text h1 {
         font-size: 3rem;
     }
-
-    .grid-two-col {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
     .statement h2 {
         font-size: 3rem;
     }
-
     .movimento h3 {
         font-size: 2rem;
     }
@@ -376,5 +379,27 @@ footer {
         flex-direction: column;
         gap: 20px;
         text-align: center;
+    }
+
+    /* Ajustes Mobile para o novo layout */
+    .movimento-wrapper {
+        flex-direction: column; /* No celular, imagem fica acima do texto */
+        align-items: flex-start;
+    }
+    .movimento-img-container {
+        width: 100%;
+        max-width: 100%;
+    }
+    .movimento-img-container .icon-box {
+        right: 10px; /* Ajuste da caixa rosa no mobile */
+    }
+    .service-list {
+        grid-template-columns: 1fr; /* Serviços empilham no celular */
+    }
+    .notes .note-list {
+        flex-direction: column; /* Notas empilham no celular */
+    }
+    .notes .note-item {
+        border-right: none;
     }
 }
