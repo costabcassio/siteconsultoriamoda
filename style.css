@@ -197,6 +197,33 @@ nav ul li.active a {
     font-size: 1.5rem;
 }
 
+/* Coluna Serviços */
+.services {
+    margin-bottom: 60px;
+}
+
+.service-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.service-item {
+    display: flex;
+    align-items: baseline;
+    font-size: 1.3rem;
+}
+
+.service-number {
+    color: #c3986a; /* Amarelo/Dourado */
+    font-family: 'Playfair Display', serif;
+    margin-right: 10px;
+}
+
+.service-title {
+    font-weight: 300;
+}
+
 /* Coluna Notas */
 .notes .note-list {
     display: flex;
